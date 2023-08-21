@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //     - є змінна х, яка може прийняти будь-яке значення (стрінг, число, undefined, null  і тд включно). Напишіть код який,
+    //     за допомоги  оператора || буде присвоювати змінній х значення "default"  якщо значення змінної х являється falsy
+    // (хибноподібні, тобто приводиться до false)
+
+
+   let a1;
+   let a2 = !!0;
+   let a3 =!!'';
+   let a4 = !!null;
+   let a5 = !!NaN;
+   let result = a1||a2||a3||a4||a5;
+   let x = 0;
+     if (!!x ===result ) {
+        console.log('default')
+    } else {
+         console.log(x)
+     }
+
+
+
+
+</script>
+
+</body>
+</html>
