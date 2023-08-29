@@ -34,28 +34,38 @@
 
 
     // - створити функцію яка приймає масив та виводить кожен його елемент
-    function arr(...item) {
-        return item;
+
+    function array1(arr) {
+        for (const item of arr) {
+            console.log('item: ', item)
+        }
     }
 
-    let i = arr('Vasy', 31, true);
-    console.log(i);
+    array1(['Vasy', 31, true]);
 
     // - створити функцію яка створює параграф з текстом. Текст задати через аргумент
 
     function paragraph(text) {
 
-        document.write(`<div> <p>${text}</p> </div>`);
+        document.write(`<p>${text}</p>`);
     }
 
     paragraph('lorem');
 
     // - створити функцію яка створює ul з трьома елементами li. Текст li задати через аргумент всім однаковий
 
+    // function list(text) {
+    //     document.write(`<ul>`);
+    //     {
+    //         document.write(`<li>${text}</li> <li>${text}</li> <li>${text}</li>`);
+    //     }
+    //     document.write(`</ul>`);
+    // }
+
     function list(text) {
         document.write(`<ul>`);
-        {
-            document.write(`<li>${text}</li> <li>${text}</li> <li>${text}</li>`);
+        for (let i = 0; i < 3; i++) {
+            document.write(`<li>${text}</li>`);
         }
         document.write(`</ul>`);
     }
@@ -65,9 +75,10 @@
     //- створити функцію яка створює ul з трьома елементами li. Текст li задати через аргумент всім однаковий.
     // Кількість li визначається другим аргументом, який є числовим (тут використовувати цикл)
 
+
     function list2(text, li) {
         document.write(`<ul>`)
-        for (let i = 0; i < arguments[1]; i++) {
+        for (let i = 0; i < li; i++) {
 
             document.write(`<li>${text}</li>`);
         }
@@ -109,13 +120,26 @@
         {id: 102, name: 'max', age: 31}
     ];
 
-    function array(arr) {
-        for (const item of arr) {
-            document.write(`<div></div>`)
-            for (const user in item) {
-                document.write(`${user}:  ${item[user]}  `);
-            }
-        }
+    //  function array(arr) {
+    //      for (const item of arr) {
+    //          document.write(`<div>`);
+    //          for (const user in item) {
+    //             document.write(`${user}:  ${item[user]}  `);
+    //        }
+    //        document.write(`</div>`);
+    //     }
+    // }
+
+    function array(arr){
+    for (const item of arr){
+        document.write(`
+        <div>
+                <p>id: ${item.id}</p>
+                <p>name: ${item.name}</p>
+                <p>age: ${item.age}</p>
+        </div>
+        `);
+    }
     }
 
     array(users);
@@ -123,42 +147,83 @@
 
     // - створити функцію яка повертає найменьше число з масиву
 
-    function minValue() {
-        const numbers = Array.from(arguments);
-        let result = 0;
-        for (const x of numbers) {
-            result = Math.min(x);
+    // function minValue() {
+    //     const numbers = Array.from(arguments);
+    //     let result = 0;
+    //     for (const x of numbers) {
+    //         result = Math.min(x);
+    //     }
+    //     return result
+    // }
+    //
+    // let min = minValue(2, 5, 25, 35, 1);
+    // console.log(min);
+
+    function minValue(arr) {
+        let min = arr[0];
+        for (let i=1; i<arr.length; i++) {
+          if (arr[i] < min){
+              min = arr[i]
+          }
         }
-        return result
+        return min
     }
 
-    let min = minValue(2, 5, 25, 35, 1);
-    console.log(min);
+   console.log(minValue ([2, 5, 25, 35, 1]));
+
 
 
     // - створити функцію sum(arr)яка приймає масив чисел, сумує значення елементів масиву та повертає його.
     // Приклад sum([1,2,10]) //->13
 
-    function sum(arr) {
+    // function sum(arr) {
+    //     let result = 0
+    //     for (let n of arr) {
+    //         result = result + n;
+    //     }
+    //     return result
+    // }
+    //
+    // let sum1 = sum([1, 2, 10]);
+    // console.log(sum1)
+
+    function sum(arr){
         let result = 0
-        for (let n of arr) {
-            result = result + n;
+        for (i=0; i<arr.length; i++){
+            result = result + arr[i]
         }
         return result
     }
-
-    let sum1 = sum([1, 2, 10]);
-    console.log(sum1)
+    console.log(sum([1,2,10]));
 
 
     // - створити функцію swap(arr,index1,index2). Функція міняє місцями заняення у відаовідних індексах
     // Приклад  swap([11,22,33,44],0,1) //=> [22,11,33,44]
 
+    function swap(arr,index1,index2){
+        let num1 = arr[index1];
 
+        arr[index1] = arr[index2];
+        arr[index2] = num1;
+
+        return arr;
+    }
+    console.log(swap([11,22,33,44],0,1));
 
     // - Написати функцію обміну валюти exchange(sumUAH,currencyValues,exchangeCurrency)
     // Приклад exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'USD') // => 250
 
+    function exchange(sumUAH,currencyValues,exchangeCurrency){
+        for (const cur of currencyValues){
+            if (cur.currency === exchangeCurrency){
+                return sumUAH/cur.value
+            }
+        }
+
+    }
+
+    resultExchange = exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'USD')
+    console.log(resultExchange)
 
 
 </script>
