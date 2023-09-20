@@ -15,7 +15,7 @@
     console.log(text1Length);
 
     let text2 = 'lorem ipsum';
-    let text2Length = text1.length;
+    let text2Length = text2.length;
     console.log(text2Length);
 
     let text3 = 'javascript is cool';
@@ -26,22 +26,25 @@
     // - Перевести до великого регістру наступні стрінгові значення
     // 'hello world', 'lorem ipsum', 'javascript is cool'
 
-    let text1Up = text1.toUpperCase();
-    console.log(text1Up);
+   let arr1 = ['hello world', 'lorem ipsum', 'javascript is cool']
 
-    let text2Up = text2.toUpperCase();
-    console.log(text2Up);
+    let arrUpCase = arr1.map(item=>
+        item.toUpperCase())
+    console.log(arrUpCase);
 
-    let text3Up = text3.toUpperCase();
-    console.log(text3Up);
 
 
     // - Перевести до нижнього регістру настипні стрінгові значення
     // 'HELLO WORLD', 'LOREM IPSUM', 'JAVASCRIPT IS COOL'
 
-    console.log(text1Up.toLowerCase());
-    console.log(text2Up.toLowerCase());
-    console.log(text3Up.toLowerCase());
+    // console.log(text1Up.toLowerCase());
+    // console.log(text2Up.toLowerCase());
+    // console.log(text3Up.toLowerCase());
+
+    let arrLowCase = arrUpCase.map(item=>
+        item.toLowerCase()
+    );
+    console.log(arrLowCase);
 
     // - Є "брудна" стрінга let str = ' dirty string   ' . Почистити її від зайвих пробілів.
 
@@ -50,15 +53,26 @@
 
     //
     // - Напишіть функцію stringToarray(str), яка перетворює рядок на масив слів.
-    //     let str = 'Ревуть воли як ясла повні';
+    // let str = 'Ревуть воли як ясла повні';
     // let arr = stringToarray(str); ['Ревуть', 'воли', 'як', 'ясла', 'повні']
 
+    // let str1 = 'Ревуть воли як ясла повні';
+    // let str1Arr = str1.split(' ');
+    // console.log(str1Arr);
+
     let str1 = 'Ревуть воли як ясла повні';
-    let str1Arr = str1.split(' ');
-    console.log(str1Arr);
+
+    const str1Arr = (str) => str.split(' ');
+    console.log(str1Arr(str1));
 
     //
     // - є масив чисел [10,8,-7,55,987,-1011,0,1050,0] . за допомоги map  перетворити всі об'єкти в масиві на стрінгові.
+
+    let arrNum = [10,8,-7,55,987,-1011,0,1050,0];
+    const arrStr = arrNum.map(item =>
+        item.toString()
+    );
+    console.log(arrStr)
 
 
     // - створити функцію sortNums(direction), яка прймає масив чисел, та сортує його від більшого до меньшого, або навпаки
@@ -66,6 +80,19 @@
     //     let nums = [11,21,3];
     // sortNums(nums,'ascending') // [3,11,21]
     // sortNums(nums,'descending') // [21,11,3]
+
+    let nums = [11,21,3];
+    const sortNums = (nums, direction)=>{
+        switch (direction){
+            case 'ascending':
+                return nums.sort((a,b) => a-b);
+            case 'descending':
+                return nums.sort((a,b) => b-a);
+        }
+
+    }
+    console.log(sortNums(nums,'ascending'));
+    console.log (sortNums(nums,'descending'));
 
 
     //
@@ -80,14 +107,14 @@
         {title: 'Frontend', monthDuration: 4}
     ];
 
+    // -- відсортувати його за спаданням за monthDuration
 
-    // -- відфільтрувати , залишивши тільки курси з тривалістю більше 5 місяців
     let sort = coursesAndDurationArray.sort((c1, c2) => {
         return c1.monthDuration - c2.monthDuration
     })
     console.log(sort);
 
-    // -- відсортувати його за спаданням за monthDuration
+    // -- відфільтрувати , залишивши тільки курси з тривалістю більше 5 місяців
 
     let filter = coursesAndDurationArray.filter(v =>
         v.monthDuration > 5
@@ -96,13 +123,21 @@
 
     // -- за допомоги map перетворити кожен елемент на наступний тип {id,title,monthDuration}
 
-    let index = 0
+    // let index = 0
+    // let courses = coursesAndDurationArray.map(function (val) {
+    //     return {id: index++, title: val.title, monthDuration: val.monthDuration}
+    // })
+    // console.log(courses)
 
+    let courses = coursesAndDurationArray.map((val, index) =>{
+        return {
+            ...val,
+            id: index
+        }
 
-    let courses = coursesAndDurationArray.map(function (val) {
-        return {id: index++, title: val.title, monthDuration: val.monthDuration}
     })
-    console.log(courses)
+
+    console.log(courses);
 
 
     // =========================
@@ -155,15 +190,18 @@
 
     // - знайти піковий туз
 
-    let allClubs = cardDeck.filter(cardClubs =>
-        cardClubs.cardSuit === 'clubs'
-    )
-    let AceClubs = allClubs.filter(cardAce =>
-        cardAce.value === 'ace'
-    )
-     console.log('піковий туз: ', AceClubs);
+    // let allClubs = cardDeck.filter(cardClubs =>
+    //     cardClubs.cardSuit === 'clubs'
+    // )
+    // let AceClubs = allClubs.filter(cardAce =>
+    //     cardAce.value === 'ace'
+    // )
+    //  console.log('піковий туз: ', AceClubs);
 
-
+    let AceClubs = cardDeck.find(card =>
+        card.value === 'ace' && card.cardSuit ==='clubs'
+    )
+    console.log('піковий туз: ', AceClubs);
 
     // - всі шістки
     let allSix = cardDeck.filter(cardSix =>
@@ -186,11 +224,15 @@
 
     // - всі трефи від 9 та більше
 
-    let allSpade = cardDeck.filter(cardSpade =>
-        cardSpade.cardSuit === 'spade'
-    )
-    let upNine = allSpade.splice(3,9)
-    console.log('всі трефи від 9 ', upNine)
+    // let allSpade = cardDeck.filter(cardSpade =>
+    //     cardSpade.cardSuit === 'spade'
+    // )
+    // let upNine = allSpade.splice(3,9)
+    // console.log('всі трефи від 9 ', upNine)
+
+    let spadeUpNine = cardDeck.filter(card =>
+        card.cardSuit === 'spade' && ['9','10','jack', 'queen', 'king', 'ace'].includes(card.value));
+    console.log('всі трефи від 9 та більше: ', spadeUpNine)
 
 
     // =========================
@@ -219,11 +261,12 @@
     console.log('всі карти по мастях: ', arrCard)
 
 
+
+
     // =========================
     //     взяти з arrays.js (який лежить в папці 2023 plan) масив coursesArray
     let coursesArray = [
-        {
-            title: 'JavaScript Complex',
+        {  title: 'JavaScript Complex',
             monthDuration: 5,
             hourDuration: 909,
             modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'node.js']
@@ -293,19 +336,15 @@
     // не можу зрозуміти, чому не працюе filter
 
     // --написати пошук всіх об'єктів, в який в modules є sass
-    //
-    // let allSass = coursesArray.filter(modSass =>
-    //     modSass.modules === 'sass'
-    // )
-    // console.log(allSass);
 
+    console.log(coursesArray.filter((c)=> c.modules.includes('sass')))
+
+
+    //
 
     // --написати пошук всіх об'єктів, в який в modules є docker
-    // let allSDocker = coursesArray.filter(modDocker =>
-    //     modDocker.modules === 'docker'
-    // )
-    // console.log(allSDocker);
 
+    console.log(coursesArray.filter((c)=> c.modules.includes('docker')))
 
 
 </script>

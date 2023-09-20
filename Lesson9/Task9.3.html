@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .body{
+            width: 100vw;
+            display: flex;
+        }
+        .course {
+            width: 45vw;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            border: 1px dashed darkblue;
+
+        }
+
+        .title{
+            text-align: center;
+            background-color: darkblue;
+            color: white;
+        }
+
+        .duration{
+            width: 45vw;
+            display: flex;
+            align-items: center;
+            background-color: lightsteelblue;
+            color: darkblue;
+            font-weight: bolder;
+        }
+
+        .monthDuration{
+            width: 15vw;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .hourDuration{
+            width: 28vw;
+            display: flex;
+            justify-content: end;
+        }
+
+        .modules{
+            width: 45vw;
+            display: flex;
+            color: midnightblue;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+<body>
+<script>
+    //     Цикл в циклі
+    // - Є масив coursesArray котрий лежить в arrays.js (на цей момент ви вже знаєте де він знаходиться)
+    //
+    let coursesArray = [
+        {
+            title: 'JavaScript Complex',
+            monthDuration: 5,
+            hourDuration: 909,
+            modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'node.js']
+        },
+        {
+            title: 'Java Complex',
+            monthDuration: 6,
+            hourDuration: 909,
+            modules: ['html',
+                'css',
+                'js',
+                'mysql',
+                'mongodb',
+                'angular',
+                'aws',
+                'docker',
+                'git',
+                'java core',
+                'java advanced']
+        },
+        {
+            title: 'Python Complex',
+            monthDuration: 6,
+            hourDuration: 909,
+            modules: ['html',
+                'css',
+                'js',
+                'mysql',
+                'mongodb',
+                'angular',
+                'aws',
+                'docker',
+                'python core',
+                'python advanced']
+        },
+        {
+            title: 'QA Complex',
+            monthDuration: 4,
+            hourDuration: 909,
+            modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'git', 'QA/QC']
+        },
+        {
+            title: 'FullStack',
+            monthDuration: 7,
+            hourDuration: 909,
+            modules: ['html',
+                'css',
+                'js',
+                'mysql',
+                'mongodb',
+                'react',
+                'angular',
+                'aws',
+                'docker',
+                'git',
+                'node.js',
+                'python',
+                'java']
+        },
+        {
+            title: 'Frontend',
+            monthDuration: 4,
+            hourDuration: 909,
+            modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'sass']
+        }
+    ];
+    // Створити для кожного елементу масиву свій блок, блок розділити блоками, в яких будуть зберігатись значення окремих властивостей,
+    // для властивості modules зробити список з елементами
+    // Приклад структири знаходиться у файлі example.png який лежить в папці з поточним фйлом
+
+    for (const course of coursesArray) {
+        let mainBlock = document.createElement('div');
+        mainBlock.classList.add('course');
+
+        let header = document.createElement('header');
+        header.classList.add('title');
+        let title = document.createElement('h2');
+        title.innerHTML = `${course.title}`
+        header.appendChild(title);
+
+        let div = document.createElement('div');
+        div.classList.add('duration');
+        let durationMonth = document.createElement('div');
+        durationMonth.classList.add('monthDuration');
+        durationMonth.innerHTML = `Кількість місяців навчання - ${course.monthDuration}`
+        let durationHour = document.createElement('div');
+        durationHour.classList.add('hourDuration');
+        durationHour.innerHTML = `Обсяг годин - ${course.hourDuration}`
+        div.append(durationMonth, durationHour)
+
+        let modules = document.createElement('div');
+        modules.classList.add('modules');
+        let list = document.createElement('ul')
+        for (const module of course.modules) {
+            let li = document.createElement('li');
+            li.innerHTML = `${module}`
+            list.append(li)
+            modules.append(list)
+
+        }
+
+
+        mainBlock.append(header, div, modules);
+        document.body.append(mainBlock);
+
+    }
+
+</script>
+</body>
+</html>
