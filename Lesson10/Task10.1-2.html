@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="" name="f1">
+    <input type="text" name="name" placeholder="name">
+    <input type="text" name="surname" placeholder="surname">
+    <input type="number" name="age" placeholder="age">
+    <button>confirm</button>
+</form>
+
+<div class="counter" >
+    <h2 id="number">0</h2>
+</div>
+
+<script>
+    // Стоврити форму з трьома полями для name,sruname,age та кнопкою. При натисканні на кнопку зчитати данні з полів,
+    // та вивести об'єкт в документ. Іншими словами : заповниои форму, натиснули кнопку, під формою з'явився блок з вашим об'єктом
+
+    let userForm = document.forms.f1;
+    userForm.onsubmit = function (e) {
+        e.preventDefault();
+
+        let userBlock = document.createElement('div');
+
+        let userName = document.createElement('p');
+        userName.innerText = this.name.value;
+
+        let userSurname = document.createElement('p')
+        userSurname.innerText = this.surname.value;
+
+        let userAge = document.createElement('p');
+        userAge.innerText = this.age.value;
+
+        this.name.value = '';
+        this.surname.value = '';
+        this.age.value = '';
+
+        userBlock.append(userName, userSurname, userAge);
+        document.body.appendChild(userBlock)
+
+    }
+
+    // ==========================
+
+
+    // є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати
+    // до неї +1
+
+    let number = localStorage.getItem('count');
+    let block = document.getElementById('number');
+
+    let numberNew = (+number+1).toString();
+
+    block.innerText = numberNew;
+    localStorage.setItem('count', numberNew);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
